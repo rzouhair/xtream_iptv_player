@@ -44,8 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
-                child: Text('Loading...'),
-              );
+                  child: CircularProgressIndicator(
+                color: Colors.deepPurple,
+              ));
             } else if (snapshot.connectionState == ConnectionState.done &&
                 snapshot.hasData) {
               var starredEntries = starred.box?.get('entries');

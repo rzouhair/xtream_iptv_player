@@ -39,8 +39,7 @@ class _ChannelsScreenState extends State<ChannelsScreen> {
                 })
               });
     } */
-    void openChannel(int index) {
-      Channels channel = entries[index];
+    void openChannel(channel) {
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => Play(
                 id: channel.stream_id.toString(),
@@ -57,7 +56,9 @@ class _ChannelsScreenState extends State<ChannelsScreen> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: Text('Loading...'),
+              child: CircularProgressIndicator(
+                color: Colors.deepPurple,
+              ),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
             return Column(
@@ -88,7 +89,7 @@ class _ChannelsScreenState extends State<ChannelsScreen> {
                       for (int i = 0; i < snapshot.data.length; i++)
                         InnerCard(
                           onPressed: () {
-                            openChannel(i);
+                            openChannel(snapshot.data[i]);
                           },
                           onStar: () {},
                           content: Padding(
